@@ -1,0 +1,9 @@
+Il est normal que la commande echo $$ affiche la même valeur (dans ce cas, 196) à chaque fois que vous l'exécutez dans votre shell. Voici pourquoi :
+
+$$ dans Bash : En Bash (et dans d'autres shells Unix), $$ est une variable spéciale qui représente l'ID du processus (PID) du shell en cours. Lorsque vous exécutez echo $$, Bash remplace $$ par l'ID du processus du shell dans lequel vous avez lancé la commande.
+
+Interprétation dans un script : Chaque fois que vous exécutez echo $$ dans votre session shell, le shell interprète $$ en remplaçant cette partie par l'ID du processus du shell actuel. Donc, peu importe combien de fois vous exécutez echo $$ dans la même session, cela renverra toujours l'ID du processus du même shell.
+
+Détermination du processus : L'ID du processus (196 dans votre cas) reste le même pour le shell donné tant que ce shell est actif. Chaque nouvelle instance de votre shell aura un ID de processus différent.
+
+En résumé, si vous exécutez echo $$ plusieurs fois dans la même session shell, vous obtiendrez toujours le même résultat, car cela renvoie l'ID du processus du shell actuel à chaque exécution de la commande.
