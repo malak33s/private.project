@@ -1,17 +1,26 @@
 #include <stdio.h>
+#include <stdlib.h>
 
-int main(int argc, char *argv[])
+int main()
 {
-	/* pointeur vers le premier argument de la ligne de commande */
-	char **arg = argv;
+    char *command = NULL;
+    size_t bufsize = 0;
 
-    /* Parcourir les arguments jusqu'a rencontrer un pointeur NULL */
+    // Print "$ " to prompt the user
+    printf("$ ");
 
-	while (*arg != NULL)
-	{
-		printf("%s\n", *arg);
-		/* afficher l'argument */
-		arg++; /* Passer a l'argument suivant */
-	}
-	return 0;
+    // Read the user input using getline
+    if (getline(&command, &bufsize, stdin) == -1)
+    {
+        perror("Error reading command");
+        exit(EXIT_FAILURE);
+    }
+
+    // Print the command entered by the user
+    printf("You entered: %s", command);
+
+    // Free the dynamically allocated memory
+    free(command);
+
+    return 0;
 }
