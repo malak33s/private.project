@@ -1,0 +1,23 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+	char *command = NULL;
+	size_t size = 0;
+
+	printf("$ "); /* afficher le "$"  montre que le prgme attend une cmd */
+	if (getline(&command, size, stdin) == -1)
+	{
+		perror("Erreur lors de la lecture de la commande");
+		exit(EXIT_FAILURE);
+	}
+
+	printf("j'ai saisie : %s", command);
+	/* affiche la command saisie par l'id */
+
+	free(command);
+	/* libere la memoie allouée par getline */
+
+	return ;
+}

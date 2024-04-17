@@ -1,0 +1,35 @@
+#include <stdio.h> : Cette ligne inclut la bibliothèque standard pour les entrées/sorties en C, ce qui nous permet d'utiliser printf et getline.
+
+#include <stdlib.h> : Cette ligne inclut la bibliothèque standard qui définit la fonction exit utilisée pour quitter le programme en cas d'erreur, et free utilisée pour libérer la mémoire allouée dynamiquement.
+
+int main() { : Définition de la fonction principale du programme.
+
+char *command = NULL; : Déclare un pointeur command initialisé à NULL qui sera utilisé pour stocker la commande entrée par l'utilisateur.
+
+size_t bufsize = 0; : Déclare une variable bufsize de type size_t initialisée à 0. Cette variable sera utilisée par getline pour allouer dynamiquement de la mémoire pour stocker la commande entrée.
+
+printf("$ "); : Affiche "$ " pour indiquer à l'utilisateur qu'une commande peut être saisie.
+
+if (getline(&command, &bufsize, stdin) == -1) { : Appelle la fonction getline pour lire une ligne d'entrée depuis stdin (le clavier) et stocker cette ligne dans command. &command est un pointeur vers le pointeur command (permettant à getline de modifier la valeur pointée par command pour allouer de la mémoire dynamiquement). &bufsize est un pointeur vers bufsize (qui permet à getline de modifier la taille du tampon si nécessaire). Si getline retourne -1, cela signifie qu'une erreur s'est produite lors de la lecture de l'entrée.
+
+perror("Erreur lors de la lecture de la commande"); : Affiche un message d'erreur spécifique à l'aide de perror pour indiquer ce qui s'est mal passé lors de l'appel à getline.
+
+exit(EXIT_FAILURE); : Quitte le programme avec un code d'échec si une erreur s'est produite lors de l'appel à getline.
+
+printf("Vous avez saisi : %s", command); : Affiche la commande saisie par l'utilisateur en utilisant printf. La commande est stockée dans command et est affichée à l'aide du spécificateur de format %s.
+
+free(command); : Libère la mémoire allouée dynamiquement pour stocker la commande en utilisant free.
+
+return 0; : Termine la fonction main avec un code de retour 0, indiquant que le programme s'est terminé avec succès
+
+
+
+
+
+
+
+
+Fonctionnement du programme :
+Ce programme affiche "$ " pour indiquer à l'utilisateur qu'une commande peut être saisie. Ensuite, il utilise getline pour lire la commande entrée par l'utilisateur depuis stdin. La commande saisie est stockée dans command. Enfin, le programme affiche la commande saisie et libère la mémoire allouée dynamiquement avant de se terminer.
+
+Compilez et exécutez ce programme pour tester son fonctionnement. Il devrait vous permettre de saisir une commande après avoir vu "$ " affiché, puis afficher cette commande sur la ligne suivante..
